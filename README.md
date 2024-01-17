@@ -1,7 +1,7 @@
 
 Mouse Movement para o player
 -
-AVISO: O código não está perfeito, mas funcional, o que abre portas para outras pessoas editarem e mudarem do jeito que quiserem, afinal, ele não está 100%. Ainda tem alguns bugs a serem concertados. Obrigado.
+AVISO: O código não está perfeito, mas funcional, o que abre portas para outras pessoas editarem e mudarem do jeito que quiserem, afinal, ele não está 100%. Ainda tem alguns bugs a serem concertados. Alguns dos erros são: a bala consegue atingir o jogador e ela está sendo duplicada.
 
 Este código foi criado durante 3 dias e algumas horas, pegando de refêrencia videos, informações na documentação e na internet. Juntei essas informações, quebrei um pouco a cabeça e deu nesse código. Ele é funcional, mas ainda está em fase de teste e algumas poucas coisas não funcionam como deveriam. Se sinta livre para pegar, editar e usar em seu projeto, caso queira.
 
@@ -14,6 +14,8 @@ Com ele você define onde vai atirar, como em muitos jogos rogue-like. Mas o dif
 * Caso o jogador mire o cursor para baixo, a sprite muda para ele de frente. Caso gire o cursor para a diagonal, a sprite do player em diagonal entra.
 
 ![Captura de tela 2024-01-17 134159](https://github.com/KaySDellaCapa/mouse-moviment/assets/140545612/25793309-cbc6-42b1-ab27-14e546d06a88)
+
+Caso não queira usar para disparar, pode usar esse cursor para interagir. Enfim, as mecanicas se expadem quando surgem outras ideias. Mas o movimento das sprites apartir do cursor não vai se perder se a estrutura se manter parecida.
 
 Para que o código funcione, você precisa ter esses nodes e childs:
 
