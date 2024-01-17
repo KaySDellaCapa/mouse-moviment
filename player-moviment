@@ -80,6 +80,14 @@ func _physics_process(delta):
 	# Resetar o estado de atirar quando não estiver mirando
 		is_shooting = false
 
+# CASO VOCÊ QUERIA APENAS ATIRAR, SEM MIRAR, O CÓDIGO:
+	#if Input.is_action_just_pressed("shoot"):
+		#is_shooting = false
+		#if shoot_cooldown.is_stopped():
+			#shoot_bullet()
+		#else:
+			#is_shooting = false
+
 
 	# Flip horizontal com base no movimento do mouse
 	if mouse.x < position.x:
