@@ -1,37 +1,69 @@
-extends CharacterBody2D
-
 # Tudo que eu criei para utilizar no meu CharacterBody2D
 # Node de CollisionShape2D; AnimatedSprite2D; Camera2D; Timer(shoot_cooldown); CollisionShape2D(BulletsCantReach - as balas não acertam essa colisão que fica no player); Marker2D (bullet_position)
 # e dentro do Marker2D outro CollisionShape2D para Hitbox
 
+extends CharacterBody2D
+
+# signal para definir qual tecla mira e qual atira. É possivel definir nas configurações
+# São menções ao signal para que não dê problema
+
 signal shoot
 signal aim
 
+# Refêrencia a Node Marker2D. É o marcador que virará preso ao cursor para o disparo
 @onready var bullet_position = $bullet_position
+
+# Refêrencia ao Timer, para que outro disparo seja efetuado depois de um determinado tempo. Modificavel a gosto pessoal
 @onready var shoot_cooldown = $shoot_cooldown
 
+# Refêrencia a cena bullet_scene, onde carrega as informações da bala.
 const BULLET_SCENE = preload("res://bullet.tscn")
 
+# Velocidade do personagem
 var speed: int
+
+# Não faz diferença na gameplay além de limitar um pouco a tela
 var screen_size: Vector2
+
+# a var de poder atira no jogo deve começar como false e se tornar true quando o disparo for efetuado
 var is_shooting: bool = false
 
+# Função que define a velocidade do jogador, roda primeiro ao abrir o jogo
 func _ready():
 	speed = 200
 
-
+# Função que pega os inputs para mover o personagem. Você pode definir pelos sinais as teclas que o movem
 func get_input():
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	velocity = input_dir.normalized() * speed
 	
-	
+# Uma das principais funções do script	
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
+
+	# Var que pega a localização do mouse para futuras funcionalidades. Ela faz funcionar.
 	var mouse = get_local_mouse_position()
+
+	# Essa é a parte mais complicada de se fazer ao ler o tutorial, pois foge de código.
+	# Para funcionar você precisara criar um Node de AnimatedSprite2D e nele criar pastas
+	# Essas pastas devem ser chamadas de "run", começa do zero: "run0" e vai até o "run7"
+	# Nessas pastas você vai colocar a animação de movimento do personagem e APENAS uma dele de idle(parado)
+	# Em todas você deve seguir essa linha e ter o mesmo número. O meu idle foi o número 4, então em toda pasta ele tem que ser o 4
+	# MAIS INFORMAÇÕES NAS FOTOS
+	# Isso vai fazer ele mudar de posição conforme a direção do mouse. Se o cursor estiver em diagonal, a sprite dele será diagonal
+	# Se o cursor estiver na frente, a sprite será frontal.
+	# Para que funciona corretamente você precisará ter sprite dele correndo em: frente, diagonal, diagonal de costas, lado, costas
+
+	# MUITO IMPORTANTE:
+	# Não tem flip de sprite nesse código, então você terá que espelhar a sprite do player e inserir
 	var angle = snapped(mouse.angle(), PI / 4) / (PI / 4)
-	
+
+	# Pega seu angulo, das pastas "run" que carrega as sprites, e as muda de acordo com a posição do seu mouse
 	angle = wrapi(int(angle), 0, 8)
+
+	# Como todas as pastas de animção começa com "run", como por exemplo "run3", ele escolha a sprite e soma com angulo
+	# Isso muda a sprite de acorda da posição do mouse
 	$AnimatedSprite2D.animation = "run" + str(angle)
 
 	# Atualizar a posição do Marker2D
@@ -56,13 +88,15 @@ func _physics_process(delta):
 		bullet_position.scale.x = -abs(bullet_position.scale.x)  # Inverte a escala horizontal
 	
 	
-# Animação
+	# Animação do jogador
 	if velocity.length() != 0:
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
 		$AnimatedSprite2D.frame = 4
-		
+
+# Com essa função se torna possivel não apenas disparar, mas disparar a bala. É diferente do signal shoot, por exemplo, que permite atirar
+# Essa função permite o disparo da bullet
 func shoot_bullet():
 	var bullet_instance = BULLET_SCENE.instantiate()
 	add_child(bullet_instance)
