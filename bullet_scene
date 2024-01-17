@@ -3,15 +3,28 @@
 
 extends Area2D
 
-#
+# Velocidade da bala
 var bullet_speed: float = 400
+
+# Distancia máxima em que a bullet alcança. Modificavel para gosto pessoal
 var max_distance: float = 1000
+
+# Distancia da bullet do cursor
 var initial_distance: float = 0  # Ajuste conforme necessário
+
+# Distancia que a bullet viaja. Função ainda não bem definida
 var distance_travelled: float = 0
+
+# Timer para a bala sair do cénario após disparada
 var time_to_live: float = 3.0
+
+# variavel ainda não bem definida. Pode ser removida ou modificada
 var elapsed_time: float = 0.0
+
+# variavel para seguir o cursor
 var target_position: Vector2
 
+# Função que inicia assim que o jogo roda
 func _ready():
 	configure_initial_bullet_position()
 
@@ -32,6 +45,7 @@ func _process(delta):
 	if distance_travelled >= max_distance or elapsed_time >= time_to_live:
 		queue_free()
 
+# Função ainda não funciona como deveria, como explicado antes no player_moviment. Fique a vontade para remover ou modificar.
 func _on_BulletsCantReach_body_entered(body):
 	# Verificar colisão com a área "BulletsCant Reach" e destruir a bala
 	if body.name == "BulletsCantReach":
