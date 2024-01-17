@@ -1,3 +1,7 @@
+# Tudo que eu criei para utilizar no meu CharacterBody2D
+# Node de CollisionShape2D; AnimatedSprite2D; Camera2D; Timer(shoot_cooldown); CollisionShape2D(BulletsCantReach - as balas não acertam essa colisão que fica no player); Marker2D (bullet_position)
+# e dentro do Marker2D outro CollisionShape2D para Hitbox
+
 extends Area2D
 
 var bullet_speed: float = 400
