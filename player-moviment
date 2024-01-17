@@ -1,0 +1,66 @@
+extends CharacterBody2D
+
+signal shoot
+signal aim
+
+@onready var bullet_position = $bullet_position
+@onready var shoot_cooldown = $shoot_cooldown
+
+const BULLET_SCENE = preload("res://bullet.tscn")
+
+var speed: int
+var screen_size: Vector2
+var is_shooting: bool = false
+
+func _ready():
+	speed = 200
+
+
+func get_input():
+	var input_dir = Input.get_vector("left", "right", "up", "down")
+	velocity = input_dir.normalized() * speed
+	
+	
+func _physics_process(delta):
+	get_input()
+	move_and_slide()
+	var mouse = get_local_mouse_position()
+	var angle = snapped(mouse.angle(), PI / 4) / (PI / 4)
+	
+	angle = wrapi(int(angle), 0, 8)
+	$AnimatedSprite2D.animation = "run" + str(angle)
+
+	# Atualizar a posição do Marker2D
+	bullet_position.position = mouse
+	
+	if Input.is_action_pressed("aim"):
+		print("aimming")
+	# Código para mirar (por exemplo, definir a direção do personagem com base no cursor)
+		is_shooting = Input.is_action_pressed("shoot") and shoot_cooldown.is_stopped()
+	if is_shooting:
+		print("shooting")
+		shoot_bullet()
+	else:
+	# Resetar o estado de atirar quando não estiver mirando
+		is_shooting = false
+
+
+	# Flip horizontal com base no movimento do mouse
+	if mouse.x < position.x:
+		bullet_position.scale.x = abs(bullet_position.scale.x)  # Mantém a escala positiva
+	else:
+		bullet_position.scale.x = -abs(bullet_position.scale.x)  # Inverte a escala horizontal
+	
+	
+# Animação
+	if velocity.length() != 0:
+		$AnimatedSprite2D.play()
+	else:
+		$AnimatedSprite2D.stop()
+		$AnimatedSprite2D.frame = 4
+		
+func shoot_bullet():
+	var bullet_instance = BULLET_SCENE.instantiate()
+	add_child(bullet_instance)
+	bullet_instance.global_position = bullet_instance.global_position
+	shoot_cooldown.start()
