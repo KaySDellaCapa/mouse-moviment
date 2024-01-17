@@ -1,6 +1,7 @@
 
 Mouse Movement para o player
 -
+AVISO: O código não está perfeito, mas funcional, o que abre portas para outras pessoas editarem e mudarem do jeito que quiserem, afinal, ele não está 100%. Ainda tem alguns bugs a serem concertados. Obrigado.
 
 Este código foi criado durante 3 dias e algumas horas, pegando de refêrencia videos, informações na documentação e na internet. Juntei essas informações, quebrei um pouco a cabeça e deu nesse código. Ele é funcional, mas ainda está em fase de teste e algumas poucas coisas não funcionam como deveriam. Se sinta livre para pegar, editar e usar em seu projeto, caso queira.
 
@@ -39,5 +40,5 @@ Para funcionar você precisara criar um Node de AnimatedSprite2D e nele criar pa
 
 Com isso, seu código já pode estar pronto para ser usado, assim como o meu.
 
-![Vídeo sem título](https://github.com/KaySDellaCapa/mouse-moviment/assets/140545612/f99d0912-ebad-432a-8943-3148db31163a)
+![Vídeo sem título (1)](https://github.com/KaySDellaCapa/mouse-moviment/assets/140545612/4ccf6514-41c4-45e8-b15b-e0ceb297cb15)
 
