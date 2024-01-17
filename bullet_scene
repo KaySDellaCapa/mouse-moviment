@@ -1,0 +1,34 @@
+extends Area2D
+
+var bullet_speed: float = 400
+var max_distance: float = 1000
+var initial_distance: float = 0  # Ajuste conforme necessário
+var distance_travelled: float = 0
+var time_to_live: float = 3.0
+var elapsed_time: float = 0.0
+var target_position: Vector2
+
+func _ready():
+	configure_initial_bullet_position()
+
+func configure_initial_bullet_position():
+	# Configurar a posição inicial da bala além da posição do mouse clicado
+	target_position = get_global_mouse_position() + Vector2.RIGHT.rotated(global_rotation) * initial_distance
+
+func _process(delta):
+	# Atualizar o tempo de vida da bala
+	elapsed_time += delta
+
+	# Mover a bala em direção ao Marker2D (target_position)
+	var direction = (target_position - global_position).normalized()
+	position += direction * bullet_speed * delta
+
+	# Verificar se a bala atingiu a distância máxima ou excedeu o tempo de vida
+	distance_travelled += bullet_speed * delta
+	if distance_travelled >= max_distance or elapsed_time >= time_to_live:
+		queue_free()
+
+func _on_BulletsCantReach_body_entered(body):
+	# Verificar colisão com a área "BulletsCant Reach" e destruir a bala
+	if body.name == "BulletsCantReach":
+		queue_free()
