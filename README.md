@@ -15,7 +15,7 @@ Com ele você define onde vai atirar, como em muitos jogos rogue-like. Mas o dif
 
 ![Captura de tela 2024-01-17 134159](https://github.com/KaySDellaCapa/mouse-moviment/assets/140545612/25793309-cbc6-42b1-ab27-14e546d06a88)
 
-Caso não queira usar para disparar, pode usar esse cursor para interagir. Enfim, as mecanicas se expadem quando surgem outras ideias. Mas o movimento das sprites apartir do cursor não vai se perder se a estrutura se manter parecida.
+Caso não queira usar para disparar, pode usar esse cursor para interagir. Enfim, as mecanicas se expadem quando surgem outras ideias. Mas o movimento das sprites a partir do cursor não vai se perder se a estrutura se manter parecida.
 
 Para que o código funcione, você precisa ter esses nodes e childs:
 
